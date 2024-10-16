@@ -1,10 +1,59 @@
 
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import RecipeForm from '../components/RecipeForm'
+import Spinner from '../components/Spinner'
+import { getRecipes, reset } from '../features/recipes/recipeSlice'
+import RecipeItem from '../components/RecipeItem'
+
 
 function Dashboard() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {user} = useSelector((state) => state.auth)
+  const {recipes, isLoading, isError, message} = useSelector((state) => state.recipes)
+
+  useEffect(() => {
+    if(isError) {
+      console.log(message)
+    }
+
+    if(!user) {
+      navigate('/login')
+    }
+
+    dispatch(getRecipes())
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch])
+
+  if(isLoading) {
+    return <Spinner/>
+  }
+
   return (
-    <div>
-      
-    </div>
+    <>
+      <section className='heading'>
+        <h1>Welcome {user && user.name}</h1>
+        <p>Recipes Dashboard</p>
+      </section>
+
+      <RecipeForm/>
+
+      <section className='content'>
+        {recipes.length > 0 ? (
+          <div className="recipes">
+            {recipes.map(recipe => (
+              <RecipeItem key={recipe._id} recipe={recipe} />
+            ))}
+          </div>
+        ) : (<h3>You have not set any recipes yet</h3>)}
+      </section>
+    </>
   )
 }
 

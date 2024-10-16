@@ -11,7 +11,7 @@ function Register() {
         name: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
     })
 
     const { name, email, password, password2 } = formData
@@ -84,7 +84,7 @@ function Register() {
                     <input type="password" className='form-control' id='password2' name='password2' value={password2} placeholder='Confirm password' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <button type='submit' className='btn btn-block'>Submit</button>
+                    <button type='submit' className='btn btn-block'>Register</button>
                 </div>
             </form>
         </section>

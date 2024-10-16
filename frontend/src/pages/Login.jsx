@@ -44,7 +44,7 @@ function Login() {
 
         const userData = {
             email,
-            password
+            password,
         }
 
         dispatch(login(userData))
@@ -71,7 +71,7 @@ function Login() {
                     <input type="password" className='form-control' id='password' name='password' value={password} placeholder='Enter password' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <button type='submit' className='btn btn-block'>Submit</button>
+                    <button type='submit' className='btn btn-block'>Login</button>
                 </div>
             </form>
         </section>

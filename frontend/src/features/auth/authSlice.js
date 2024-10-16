@@ -8,7 +8,7 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
+    message: '',
 }
 
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
@@ -42,7 +42,7 @@ export const authSlice = createSlice({
             state.isSuccess = false
             state.isError = false
             state.message = ''
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
